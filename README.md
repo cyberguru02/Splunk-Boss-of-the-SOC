@@ -42,7 +42,7 @@ As Incident Handlers or SOC Analysts, it is essential to understand attackers' t
 In this walkthrough I will gather some created questions that highlight parts of the kill chain from various sources that will help give better insight into the logs such as TryHackMe and bots.splunk.com.
 
 
-**Part 1: Reconnaissance**
+**Reconnaissance**
 
 In this phase, the attacker is gathering information about Wayne Enterprises to plan their attack. As Alice Bluebird, the task is to identify and analyze the data that can help one understand what the attacker was looking for and how they might have discovered vulnerabilities in the website. The attacker is likely to collect information from open sources such as social media or perform a network scan to search of open ports, services, and potential vulnerabilities. Let’s go ahead and start tracing down the attacker’s footprints. 
 
@@ -138,7 +138,7 @@ Therefore, based on the analysis of Suricata alerts and HTTP stream headers, we 
 
 ​
 
-**Question 6: What is the IP address of the server imreallynotbatman.com?**
+**Question 5: What is the IP address of the server imreallynotbatman.com?**
 
 ​
 
@@ -153,14 +153,14 @@ To determine the IP address of the server hosting imreallynotbatman.com, we anal
 In the exploitation phase of a cyber-attack, attackers capitalize on vulnerabilities identified during earlier reconnaissance and scanning stages. This phase marks the transition from passive reconnaissance to active intrusion, where attackers use various tools and methods to exploit specific weaknesses in the target system or network. Their primary objectives include gaining unauthorized access, disrupting services, and potentially exfiltrating sensitive data. Cybersecurity personnels must act swiftly against these exploitations by detecting, patching, or updating configurations to defend from it. As a SOC analyst, Alice in this situation, let’s try to see what sort-of exploitation the attacker used.
 
 ​
-**What was the URI which got multiple brute force attempts? We can see that based on the picutyre the URI, Joomla has multiple brute force attempts made.**  
+**Question 6: What was the URI which got multiple brute force attempts? We can see that based on the picutyre the URI, Joomla has multiple brute force attempts made.**  
 
 
 ​![image](https://github.com/user-attachments/assets/47ddddfc-5ceb-4738-8ec7-fc693d473788)
 
 
 
-**Against which username was the brute force attempt made?​​**
+**Question 7: Against which username was the brute force attempt made?​​**
 
 ​
 
@@ -170,7 +170,7 @@ This query will generate a table ordered by time, displaying attributes such as 
 ​![image](https://github.com/user-attachments/assets/796af3a3-b3e3-4cee-9cba-4420c61bbc9a)
 
 
-**What was the correct password for admin access to the content management system running imreallynotbatman.com?**
+**Question 8: What was the correct password for admin access to the content management system running imreallynotbatman.com?**
 
 ​
 ![image](https://github.com/user-attachments/assets/eff02c90-07b2-4961-b6fc-80bfd22a97a9)
@@ -194,7 +194,7 @@ Running the query provided a clear indication of the passwords used before the s
 This discovery highlights the critical importance of robust password management practices and continuous monitoring of authentication attempts. Detecting and responding to such unauthorized access incidents promptly is essential for maintaining the security and integrity of web applications and content management systems.
 
 
-**How many unique passwords were attempted in the brute force attempt?**
+**Question 9: How many unique passwords were attempted in the brute force attempt?**
 
 ​Using the query:
 
@@ -210,7 +210,7 @@ Adding the count() function with the previous query allows us to find the distin
 The answer is 412
 
 
-**What IP address is likely attempting a brute force password attack against imreallynotbatman.com?**
+**Question 10: What IP address is likely attempting a brute force password attack against imreallynotbatman.com?**
 
 
 To pinpoint the IP address behind a suspected brute force password attack, on imreallynotbatman.com I took an approach centered around web application attacks that involve HTTP traffic. Brute force attacks usually result in HTTP traffic flow between the attacker and the web server.
@@ -224,7 +224,7 @@ Initially most of the traffic was traced back to IP address 40.80.148.42 linked 
 ![image](https://github.com/user-attachments/assets/0ad1ecbb-95de-40a9-9cc2-4319f3799ccb)
 
 ​
-**Installation Part:**
+**Installation:**
 
 This is the phase where attackers prepare the infrastructure and tools necessary to execute their cyber operations effectively. From the attacker's perspective, installation involves setting up command and control (C2) servers, deploying malware onto compromised systems, and establishing persistence mechanisms to maintain access.
 
@@ -232,7 +232,7 @@ This is the phase where attackers prepare the infrastructure and tools necessary
 As a SOC analyst, like Alice in this scenario, this sets the stage for subsequent threat detection and response actions, allowing for timely identification of vulnerabilities and proactive defense strategies to protect sensitive assets and maintain operational continuity. By comprehending the tactics employed during installation, SOC analysts can enhance their ability to detect and mitigate potential threats early in the attack lifecycle, thereby minimizing the impact of cyber incidents and safeguarding organizational assets against persistent adversaries. Let’s see how the attackers installed the malware on the web server.
 
 
-**Sysmon also collects the Hash value of the processes being created. What is the MD5 HASH of the program 3791.exe?**
+**Question 11: Sysmon also collects the Hash value of the processes being created. What is the MD5 HASH of the program 3791.exe?**
 
 
 In this scenario, to find the MD5 hash of the program `3791.exe`, we can use the following Splunk query:
@@ -259,7 +259,7 @@ From the search results, we find that the MD5 hash value for the program `3791.e
 By capturing and analyzing these hash values, SOC analysts can quickly identify and respond to potential threats, ensuring that any unauthorized or malicious software is detected and mitigated promptly. In this case, identifying the MD5 hash of `3791.exe` helps in tracking the specific instance of the program and assessing its potential impact on the system.
 
 
-**Looking at the logs, which user executed the program 3791.exe on the server?​**
+**Question 12: Looking at the logs, which user executed the program 3791.exe on the server?​**
 
 We can check on one of the event logs pulled from one of the previous queries regarding the “3791.exe” and devlve deeper into one of them. In the picture below, I find the user who exevuted the program, “NT AUTHORITY\USR”.
 
@@ -267,7 +267,7 @@ We can check on one of the event logs pulled from one of the previous queries re
 ![image](https://github.com/user-attachments/assets/1582c592-b732-420d-9b43-46fd266d1b09)
 
 
-**Search hash on the virustotal. What other name is associated with this file 3791.exe?**
+**Question 13: Search hash on the virustotal. What other name is associated with this file 3791.exe?**
 
 ​
 
@@ -292,7 +292,7 @@ During this phase, security teams deploy advanced threat detection mechanisms, l
 Ultimately, the actions on objective phase underscores the critical importance of continuous monitoring, rapid response capabilities, and proactive defense strategies in safeguarding organizational assets and maintaining operational resilience against sophisticated cyber threats.
 
 
-**What is the name of the file that defaced the imreallynotbatman.com website?**
+**Question 14: What is the name of the file that defaced the imreallynotbatman.com website?**
 
 
 To identify this malicious file, we focused on the HTTP traffic, as it likely involved a download via the web. Using the stream:http source type and the victim’s IP address (192.168.250.70), we looked for suspicious activity in the src_headers field. Using the query: index=botsv1 src=192.168.250.70 sourcetype=suricata dest_ip=23.22.63.114, we can uncover a suspicious filename. To look into the file name more in-depth, I went and queried, "index=botsv1 url="/poisonivy-is-coming-for-you-batman.jpeg" dest_ip="192.168.250.70" | table _time src dest_ip http.hostname url" to display relevant field(s) within a table format. I was able to confirm that the file is “poisonivy-is-coming-for-you-batman.jpeg". With the information provided I am also able to confirm the details about the file of where it came from and sent to.
@@ -301,7 +301,7 @@ To identify this malicious file, we focused on the HTTP traffic, as it likely in
 ![image](https://github.com/user-attachments/assets/01c91a09-f964-40c0-a9fb-6469219e71d5)
 
 
-**Fortigate Firewall 'fortigate_utm' detected SQL attempt from the attacker's IP 40.80.148.42. What is the name of the rule that was triggered during the SQL Injection attempt?**
+**Question 15: Fortigate Firewall 'fortigate_utm' detected SQL attempt from the attacker's IP 40.80.148.42. What is the name of the rule that was triggered during the SQL Injection attempt?**
 
 By searching up the query: index=botsv1 src=40.80.148.42 sourcetype=suricata
 
@@ -326,7 +326,7 @@ For cybersecurity personnel, rapid detection and response during the C2 phase ar
 Ultimately, understanding the tactics employed in the C2 phase allows cybersecurity professionals to implement proactive defense measures. This includes blocking malicious domains, disabling unauthorized network protocols, and continuously updating security controls to thwart ongoing C2 activities. By disrupting command and control mechanisms, organizations can mitigate the impact of cyber-attacks, protect sensitive data, and restore operational integrity swiftly.
 
 
-**This attack used dynamic DNS to resolve to the malicious IP. What fully qualified domain name (FQDN) is associated with this attack?**
+**Question 16: This attack used dynamic DNS to resolve to the malicious IP. What fully qualified domain name (FQDN) is associated with this attack?**
 
 
 To find the IP address the attacker used, we can examine network-centric log sources based on using the Fortigate firewall logs, despite confirming the answer in a different question. Use the search query: index=botsv1 sourcetype=fortigate_utm "poisonivy-is-coming-for-you-batman.jpeg". By searching it we can check the logs to confirm what the FQDN is and it’s showing the identified host as prankglassinebracket.jumpingcrab.com in the packet that made the GET request for the JPEG image used to deface the website.
@@ -348,7 +348,7 @@ Cybersecurity personnel must respond swiftly during this phase by actively monit
 As a SOC analyst like Alice in this scenario, understanding the methods of exploitation used by attackers is crucial. By analyzing attack vectors and the specific techniques employed during weaponization, SOC teams can effectively mitigate risks, protect organizational assets, and maintain operational resilience against evolving cyber threats.
 
 
-**What IP address has P01s0n1vy tied to domains that are pre-staged to attack Wayne Enterprises?**
+**Question 17: What IP address has P01s0n1vy tied to domains that are pre-staged to attack Wayne Enterprises?**
 
 Based on the data gathered from this attack and common open-source intelligence (OSINT) sources for domain names, what is the email address that is most likely associated with the P01s0n1vy APT group?
 
@@ -373,7 +373,7 @@ As a SOC analyst, Alice in this situation, understanding the delivery phase invo
 This following questions outlines the significance of the Delivery phase in cyber-attacks, emphasizing the role of SOC analysts in detecting and mitigating potential threats during this critical stage of the attack lifecycle.
 
 
-**What is the HASH of the Malware associated with the APT group?**
+**Question 18: What is the HASH of the Malware associated with the APT group?**
 
 
 I went to the Hybrid Analysis, a malware analysis website, and looked up the APT group to see the asociated hash.
@@ -385,7 +385,7 @@ I went to the Hybrid Analysis, a malware analysis website, and looked up the APT
 It reveals the MD5 hash: c99131e0169171935c5ac32615ed6261, as the associated hash with the APT group.
 
 
-**What is the name of the Malware associated with the Poison Ivy Infrastructure?**
+**Question 19: What is the name of the Malware associated with the Poison Ivy Infrastructure?**
 
 
 I ran the hash to determine what the malware was on virustotal, and saw it was associated with the name - MirandaTateScreensaver.scr.exe
